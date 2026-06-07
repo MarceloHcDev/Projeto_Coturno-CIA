@@ -2,11 +2,12 @@ import React from 'react';
 import ProductTableHeader from '../molecules/ProductTableHeader.jsx';
 import StockBadge from '../atoms/Icons.jsx';
 import { EditButton, DeleteButton } from '../atoms/Icons.jsx';
-import { BoxIcon } from '../atoms/Icons.jsx'; // Reaproveitando o ícone mapeado no gemini.md
+import { BoxIcon } from '../atoms/Icons.jsx';
+
 
 export default function ProductTable({ products, onEdit, onDelete }) {
   return (
-    <div className="w-full overflow-x-auto bg-white border border-slate-100 rounded-xl shadow-sm">
+    <div className="w-full overflow-x-auto bg-white border border-slate-300 rounded-xl shadow-sm">
       <table className="w-full min-w-80 border-collapse align-middle">
         <ProductTableHeader />
         <tbody className="divide-y divide-slate-100 text-sm text-slate-800">

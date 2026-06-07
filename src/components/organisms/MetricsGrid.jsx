@@ -12,7 +12,7 @@ export const MetricsGrid = () => {
       value: 'R$ 147.890',
       trend: 12.5,
       icon: CurrencyIcon,
-      bgColor: 'bg-emerald-500'
+      bgColor: 'bg-army'
     },
     {
       id: 'pedidos',
@@ -20,7 +20,7 @@ export const MetricsGrid = () => {
       value: '234',
       trend: 8.2,
       icon: CartIcon,
-      bgColor: 'bg-blue-500'
+      bgColor: 'bg-marrom'
     },
     {
       id: 'estoque',
@@ -28,7 +28,7 @@ export const MetricsGrid = () => {
       value: '1.456',
       trend: -3.1,
       icon: BoxIcon,
-      bgColor: 'bg-purple-500'
+      bgColor: 'bg-azul'
     },
     {
       id: 'clientes',
@@ -36,7 +36,7 @@ export const MetricsGrid = () => {
       value: '8.932',
       trend: 15.3,
       icon: PeopleIcon,
-      bgColor: 'bg-orange-500'
+      bgColor: 'bg-preto'
     }
   ];
 

@@ -17,11 +17,11 @@ export const MetricCard = ({
   iconBgColor = "bg-blue-500" 
 }) => {
   return (
-    <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm flex flex-col gap-4 min-w-60 hover:shadow-md transition-shadow duration-200">
+    <div className="bg-white p-6 rounded-xl border border-slate-300 shadow-sm flex flex-col gap-4 min-w-60 hover:shadow-md transition-shadow duration-200">
       
       {/* Topo do Card: Ícone e Tendência */}
       <div className="flex items-start justify-between">
-        <div className={`p-3 rounded-lg text-white ${iconBgColor} shadow-lg shadow-current/10`}>
+        <div className={`p-3 squared-lg text-white ${iconBgColor} shadow-lg shadow-current/10`}>
           <Icon className="w-6 h-6" />
         </div>
         <TrendBadge value={trend} />

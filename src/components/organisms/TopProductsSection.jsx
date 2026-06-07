@@ -5,15 +5,15 @@ import { ProductRow } from '../molecules/ProductRow.jsx';
 export const TopProductsSection = () => {
   // Dados extraídos com fidelidade cirúrgica a partir da imagem fornecida
   const productsData = [
-    { id: 1, name: 'Nike Air Max 2024', sales: 342, revenue: 'R$ 68.400', rating: 4.8 },
-    { id: 2, name: 'Adidas Ultraboost', sales: 298, revenue: 'R$ 59.600', rating: 4.9 },
-    { id: 3, name: 'Puma RS-X', sales: 256, revenue: 'R$ 38.400', rating: 4.6 },
-    { id: 4, name: 'New Balance 574', sales: 234, revenue: 'R$ 35.100', rating: 4.7 },
-    { id: 5, name: 'Vans Old Skool', sales: 198, revenue: 'R$ 23.760', rating: 4.5 },
+    { id: 1, name: 'Atalaia Combat', sales: 342, revenue: 'R$ 68.400', rating: 4.8 },
+    { id: 2, name: 'Atalaia Montanha', sales: 298, revenue: 'R$ 59.600', rating: 4.9 },
+    { id: 3, name: 'Acero Adventure', sales: 256, revenue: 'R$ 38.400', rating: 4.6 },
+    { id: 4, name: 'MacBoot Montanha', sales: 234, revenue: 'R$ 35.100', rating: 4.7 },
+    { id: 5, name: 'MacBoot Rider', sales: 198, revenue: 'R$ 23.760', rating: 4.5 },
   ];
 
   return (
-    <div className="w-full bg-white rounded-xl border border-slate-100 shadow-sm mt-6 overflow-hidden">
+    <div className="w-full bg-white rounded-xl border border-slate-300 shadow-sm mt-6 overflow-hidden">
       {/* Cabeçalho da Seção */}
       <div className="p-6 pb-4">
         <ChartHeader title="Top 5 Produtos Mais Vendidos" />

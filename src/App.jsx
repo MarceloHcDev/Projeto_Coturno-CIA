@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // Páginas do Painel
 import Home_admin from './pages/Home_admin';
 import Produtos_Catalogo from './pages/Produtos_Catalogo';
+import UsuariosGestao from './pages/UsuariosGestao';
 
 export default function App() {
   return (
@@ -12,8 +13,9 @@ export default function App() {
         <Route path="/" element={<Navigate to="/admin" replace />} />
         
         {/* Rotas do Painel Administrativo */}
-        <Route path="/admin" element={<Home_admin />} />[cite: 1]
+        <Route path="/admin" element={<Home_admin />} />
         <Route path="/admin/produtos" element={<Produtos_Catalogo />} />
+        <Route path="/admin/usuarios" element={<UsuariosGestao />} />
         
         {/* Fallback para páginas não encontradas */}
         <Route path="*" element={

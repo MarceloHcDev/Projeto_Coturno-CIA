@@ -14,11 +14,11 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 min-h-screen bg-black flex flex-col justify-between py-8 select-none">
+    <aside className="fixed top-0 left-0 z-40 w-64 h-screen bg-pretoclaro flex flex-col justify-between py-8 select-none">
       {/* Topo: Logo e Menu */}
       <div className="space-y-8">
         <div className="px-6 flex items-center justify-between">
-          <span className="text-white font-bold text-lg tracking-wide">Coturno & Cia</span>
+          <span className="text-white font-barlow font-bold text-2xl tracking-wide">Coturno & Cia</span>
           <button className="text-gray-400 hover:text-white sm:hidden" aria-label="Fechar menu">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -27,7 +27,7 @@ export default function Sidebar() {
         </div>
 
         {/* Links de Navegação */}
-        <nav className="flex flex-col space-y-1">
+        <nav className="font-barlow flex flex-col space-y-1">
           <SidebarNavItem 
             icon={HomeIcon} 
             label="Dashboard" 
@@ -44,10 +44,7 @@ export default function Sidebar() {
             icon={UsersIcon} 
             label="Usuários" 
             isActive={location.pathname === '/admin/usuarios'} 
-            onClick={() => {
-              // Desconsiderado por enquanto (sem página implementada)
-              console.log('Rota de usuários clicada (página em desenvolvimento).');
-            }}
+            onClick={() => navigate('/admin/usuarios')}
           />
         </nav>
       </div>
@@ -62,6 +59,6 @@ export default function Sidebar() {
           <span>Sair</span>
         </button>
       </div>
-    </aside>
+  </aside>
   );
 }

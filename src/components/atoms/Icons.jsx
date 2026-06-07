@@ -32,8 +32,8 @@ export const MenuHamburgerIcon = ({ className = "w-5 h-5" }) => (
 );
 
 export const CurrencyIcon = ({ className = "w-5 h-5" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className={className}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-1.958-.659-1.071-.927-1.071-2.43 0-3.358C11.204 7.33 12.658 7.33 13.732 8.261L14.25 8.7" />
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className={className}>
+    <path strokeLinecap="square" strokeLinejoin="square" d="M12 2v20M17 7.5A4.5 4.5 0 0 0 12.5 3h-1A4.5 4.5 0 0 0 7 7.5v0A4.5 4.5 0 0 0 11.5 12h1A4.5 4.5 0 0 1 17 16.5v0a4.5 4.5 0 0 1-4.5 4.5h-1A4.5 4.5 0 0 1 7 16.5" />
   </svg>
 );
 
@@ -53,10 +53,36 @@ export const BoxIcon = ({ className = "w-5 h-5" }) => (
 
 // Ícone de Grupo de Usuários - Card: Clientes Ativos
 export const PeopleIcon = ({ className = "w-5 h-5" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.656-5.64 9.164 9.164 0 0 0-1.674 1.545M3.738 18.441A9.094 9.094 0 0 1 7.498 18c2.42 0 4.673.94 6.364 2.477m-10.124-.316A9.122 9.122 0 0 1 3 17.5a3 3 0 0 1 4.656-5.64 9.158 9.158 0 0 1 1.673 1.545m6.115 1.455a9.13 9.13 0 0 1-3.115-.367m0 0a3.375 3.375 0 1 1-3.375-3.375M12 7.5a3.375 3.375 0 1 1-3.375-3.375A3.375 3.375 0 0 1 12 7.5Z" />
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    className={className}
+  >
+    {/* Cabeça do Avatar (Círculo Superior Centralizado) */}
+    <circle cx="12" cy="6.5" r="4" />
+    
+    {/* Corpo do Avatar (Busto Arredondado Inferior) */}
+    <path d="M12 12c-4.418 0-8 2.582-8 6v2h16v-2c0-3.418-3.582-6-8-6z" />
   </svg>
 );
+
+export const UserIcon = ({ className = "w-5 h-5" }) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className={className}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+      />
+    </svg>
+ );
 
 export const TrendBadge = ({ value }) => {
   const isPositive = value >= 0;
