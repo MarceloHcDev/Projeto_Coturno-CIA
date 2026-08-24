@@ -1,14 +1,23 @@
 import React from 'react';
 import { UserIcon, EditButton, DeleteButton } from '../atoms/Icons.jsx'; // Utilizando os SVGs nativos
 
-// Badge colorido baseado no tipo de usuário da imagem
-function StatusBadge({ tipo }) {
+// Badge colorido baseado no tipo e status do usuário
+function TypeBadge({ tipo }) {
   const baseClasses = "px-2 py-0.5 text-xs font-medium rounded-full";
   
   if (tipo === 'Administrador') {
     return <span className={`${baseClasses} bg-purple-100 text-purple-800`}>Administrador</span>;
   }
   return <span className={`${baseClasses} bg-blue-100 text-blue-800`}>Cliente</span>;
+}
+
+function StatusBadge({ status }) {
+  const baseClasses = "px-2 py-0.5 text-xs font-medium rounded-full";
+  
+  if (status === 'Ativo') {
+    return <span className={`${baseClasses} bg-emerald-100 text-emerald-800`}>Ativo</span>;
+  }
+  return <span className={`${baseClasses} bg-rose-100 text-rose-800`}>Inativo</span>;
 }
 
 export default function UserTable({ users = [], onEdit, onDelete }) {
@@ -21,6 +30,8 @@ export default function UserTable({ users = [], onEdit, onDelete }) {
             <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans">Contato</th>
             <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans">CPF</th>
             <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans">Tipo</th>
+            <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans">Provedor</th>
+            <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans">Status</th>
             <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans">Cadastrado Em</th>
             <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans text-center">Ações</th>
           </tr>
@@ -29,12 +40,12 @@ export default function UserTable({ users = [], onEdit, onDelete }) {
           {users.length > 0 ? (
             users.map((user) => (
               <tr key={user.id} className="hover:bg-slate-50/50 transition-colors">
-                {/* Nome + Avatar */}
+                {/* Nome + Sobrenome + Avatar */}
                 <td className="py-4 px-6 flex items-center gap-4">
-                  <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-500">
+                  <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 shrink-0">
                     <UserIcon className="w-5 h-5" />
                   </div>
-                  <span className="font-medium text-slate-900">{user.name}</span>
+                  <span className="font-medium text-slate-900">{`${user.firstName} ${user.lastName}`}</span>
                 </td>
                 
                 {/* Contato (E-mail e Telefone em bloco) */}
@@ -50,7 +61,15 @@ export default function UserTable({ users = [], onEdit, onDelete }) {
                 
                 {/* Tipo de Usuário (Badge) */}
                 <td className="py-4 px-6">
-                  <StatusBadge tipo={user.type} />
+                  <TypeBadge tipo={user.type} />
+                </td>
+
+                {/* Provedor */}
+                <td className="py-4 px-6 text-slate-600 font-medium text-xs">{user.provider}</td>
+
+                {/* Status (Badge) */}
+                <td className="py-4 px-6">
+                  <StatusBadge status={user.status} />
                 </td>
                 
                 {/* Data de Cadastro */}
@@ -66,7 +85,7 @@ export default function UserTable({ users = [], onEdit, onDelete }) {
             ))
           ) : (
             <tr>
-              <td colSpan="6" className="py-8 px-6 text-center text-sm text-slate-400">
+              <td colSpan="8" className="py-8 px-6 text-center text-sm text-slate-400">
                 Nenhum usuário encontrado para o termo buscado.
               </td>
             </tr>

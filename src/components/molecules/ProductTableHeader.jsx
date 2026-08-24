@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function ProductTableHeader() {
-  const headers = ['PRODUTO', 'CATEGORIA', 'PREÇO', 'ESTOQUE', 'TAMANHOS', 'COR', 'AÇÕES'];
+  const headers = ['PRODUTO', 'TIPO', 'MARCA / MODELO', 'PREÇO', 'ESTOQUE', 'TAMANHOS', 'COR', 'STATUS', 'AÇÕES'];
   
   return (
     <thead className="bg-slate-50 border-b border-slate-100">

@@ -11,14 +11,14 @@ export default function UsuariosGestao() {
   const [editingId, setEditingId] = useState(null);
 
   const [users, setUsers] = useState([
-    { id: 1, name: 'João Silva', email: 'joao.silva@email.com', phone: '(11) 98765-4321', cpf: '123.456.789-00', type: 'Cliente', createdAt: '15/03/2026' },
-    { id: 2, name: 'Maria Santos', email: 'maria.santos@email.com', phone: '(21) 91234-5678', cpf: '987.654.321-00', type: 'Cliente', createdAt: '10/02/2026' },
-    { id: 3, name: 'Pedro Oliveira', email: 'pedro.oliveira@email.com', phone: '(31) 99999-8888', cpf: '456.789.123-00', type: 'Administrador', createdAt: '05/01/2026' },
-    { id: 4, name: 'Ana Costa', email: 'ana.costa@email.com', phone: '(41) 97777-6666', cpf: '789.123.456-00', type: 'Cliente', createdAt: '28/04/2026' },
+    { id: 1, firstName: 'João', lastName: 'Silva', email: 'joao.silva@email.com', phone: '(11) 98765-4321', cpf: '123.456.789-00', type: 'Cliente', provider: 'Google', status: 'Ativo', createdAt: '15/03/2026' },
+    { id: 2, firstName: 'Maria', lastName: 'Santos', email: 'maria.santos@email.com', phone: '(21) 91234-5678', cpf: '987.654.321-00', type: 'Cliente', provider: 'Email/Senha', status: 'Ativo', createdAt: '10/02/2026' },
+    { id: 3, firstName: 'Pedro', lastName: 'Oliveira', email: 'pedro.oliveira@email.com', phone: '(31) 99999-8888', cpf: '456.789.123-00', type: 'Administrador', provider: 'Google', status: 'Ativo', createdAt: '05/01/2026' },
+    { id: 4, firstName: 'Ana', lastName: 'Costa', email: 'ana.costa@email.com', phone: '(41) 97777-6666', cpf: '789.123.456-00', type: 'Cliente', provider: 'Email/Senha', status: 'Inativo', createdAt: '28/04/2026' },
   ]);
 
   const [formData, setFormData] = useState({
-    name: '', email: '', phone: '', cpf: '', type: 'Cliente'
+    firstName: '', lastName: '', email: '', phone: '', cpf: '', type: 'Cliente', provider: 'Email/Senha', status: 'Ativo', createdAt: ''
   });
 
   const handleEdit = (id) => {
@@ -31,7 +31,8 @@ export default function UsuariosGestao() {
   };
   
   const handleOpenCreate = () => {
-    setFormData({ name: '', email: '', phone: '', cpf: '', type: 'Cliente' });
+    const today = new Date().toLocaleDateString('pt-BR');
+    setFormData({ firstName: '', lastName: '', email: '', phone: '', cpf: '', type: 'Cliente', provider: 'Email/Senha', status: 'Ativo', createdAt: today });
     setFormMode('create');
   };
   
@@ -41,7 +42,7 @@ export default function UsuariosGestao() {
   };
 
   const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.cpf.includes(searchTerm)
   );
@@ -51,7 +52,7 @@ export default function UsuariosGestao() {
     if (formMode === 'edit') {
       setUsers(users.map(u => u.id === editingId ? { ...formData, id: editingId } : u));
     } else {
-      setUsers([...users, { ...formData, id: Date.now(), createdAt: new Date().toLocaleDateString('pt-BR') }]);
+      setUsers([...users, { ...formData, id: Date.now() }]);
     }
     handleCloseForm();
   };
@@ -80,8 +81,12 @@ export default function UsuariosGestao() {
               <form onSubmit={handleFormSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col space-y-1">
-                    <label className="text-sm font-medium text-slate-600">Nome Completo</label>
-                    <input type="text" className="p-2 border border-slate-200 rounded-lg" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} required />
+                    <label className="text-sm font-medium text-slate-600">Nome</label>
+                    <input type="text" className="p-2 border border-slate-200 rounded-lg" value={formData.firstName} onChange={(e) => setFormData({...formData, firstName: e.target.value})} required />
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <label className="text-sm font-medium text-slate-600">Sobrenome</label>
+                    <input type="text" className="p-2 border border-slate-200 rounded-lg" value={formData.lastName} onChange={(e) => setFormData({...formData, lastName: e.target.value})} required />
                   </div>
                   <div className="flex flex-col space-y-1">
                     <label className="text-sm font-medium text-slate-600">E-mail</label>
@@ -101,6 +106,25 @@ export default function UsuariosGestao() {
                       <option value="Cliente">Cliente</option>
                       <option value="Administrador">Administrador</option>
                     </select>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <label className="text-sm font-medium text-slate-600">Provedor</label>
+                    <select className="p-2 border border-slate-200 rounded-lg bg-white" value={formData.provider} onChange={(e) => setFormData({...formData, provider: e.target.value})}>
+                      <option value="Email/Senha">Email/Senha</option>
+                      <option value="Google">Google</option>
+                      <option value="Apple">Apple</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <label className="text-sm font-medium text-slate-600">Status</label>
+                    <select className="p-2 border border-slate-200 rounded-lg bg-white" value={formData.status} onChange={(e) => setFormData({...formData, status: e.target.value})}>
+                      <option value="Ativo">Ativo</option>
+                      <option value="Inativo">Inativo</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col space-y-1">
+                    <label className="text-sm font-medium text-slate-600">Data de Criação</label>
+                    <input type="text" className="p-2 border border-slate-200 rounded-lg bg-slate-100 text-slate-500 cursor-not-allowed" value={formData.createdAt} readOnly />
                   </div>
                 </div>
 

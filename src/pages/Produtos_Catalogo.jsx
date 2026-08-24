@@ -10,14 +10,14 @@ export default function Produtos_Catalogo() {
   const [editingId, setEditingId] = useState(null);
 
   const [products, setProducts] = useState([
-    { id: 1, name: 'Atalaia Combat', category: 'Coturno', price: 599.90, stock: 45, sizes: '38-44', color: 'Preto/Branco', image: '/product1.jpg' },
-    { id: 2, name: 'Atalaia Montanha', category: 'Coturno', price: 799.90, stock: 32, sizes: '36-42', color: 'Azul', image: '/product2.jpg' },
-    { id: 3, name: 'Acero Adventure', category: 'Borzeguim', price: 299.90, stock: 28, sizes: '38-44', color: 'Marrom', image: '/product3.jpg' },
-    { id: 4, name: 'Acero Adventure', category: 'Borzeguim', price: 249.90, stock: 56, sizes: '36-42', color: 'Bege', image: '/product4.jpg' },
+    { id: 1, name: 'Atalaia Combat', productType: 'Coturno', model: 'Combat X', brand: 'Atalaia', description: 'Coturno tático de alta resistência.', active: 'Ativo', price: 599.90, stock: 45, sizes: '38-44', color: 'Preto/Branco', image: '/product1.jpg' },
+    { id: 2, name: 'Atalaia Montanha', productType: 'Coturno', model: 'Montanha Pro', brand: 'Atalaia', description: 'Ideal para terrenos acidentados.', active: 'Ativo', price: 799.90, stock: 32, sizes: '36-42', color: 'Azul', image: '/product2.jpg' },
+    { id: 3, name: 'Acero Adventure', productType: 'Borzeguim', model: 'Adventure Classic', brand: 'Acero', description: 'Borzeguim confortável para trilhas.', active: 'Ativo', price: 299.90, stock: 28, sizes: '38-44', color: 'Marrom', image: '/product3.jpg' },
+    { id: 4, name: 'Acero Adventure', productType: 'Borzeguim', model: 'Adventure Light', brand: 'Acero', description: 'Versão leve para o dia a dia.', active: 'Inativo', price: 249.90, stock: 56, sizes: '36-42', color: 'Bege', image: '/product4.jpg' },
   ]);
 
   const [formData, setFormData] = useState({
-    name: '', category: '', price: '', stock: '', sizes: '', color: '', image: ''
+    name: '', productType: '', model: '', brand: '', description: '', active: 'Ativo', price: '', stock: '', sizes: '', color: '', image: ''
   });
 
   const handleEdit = (id) => {
@@ -30,7 +30,7 @@ export default function Produtos_Catalogo() {
   };
   
   const handleOpenCreate = () => {
-    setFormData({ name: '', category: '', price: '', stock: '', sizes: '', color: '', image: '' });
+    setFormData({ name: '', productType: '', model: '', brand: '', description: '', active: 'Ativo', price: '', stock: '', sizes: '', color: '', image: '' });
     setFormMode('create');
   };
   
@@ -43,14 +43,13 @@ export default function Produtos_Catalogo() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      
       setFormData({...formData, image: `/${file.name}`});
     }
   };
 
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.category.toLowerCase().includes(searchTerm.toLowerCase())
+    (product.productType && product.productType.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   const handleFormSubmit = (e) => {
@@ -108,21 +107,51 @@ export default function Produtos_Catalogo() {
                     />
                   </div>
 
-                  {/* Categoria */}
+                  {/* Tipo do Produto */}
                   <div className="flex flex-col space-y-1">
-                    <label className="text-sm font-medium text-slate-600">Categoria</label>
+                    <label className="text-sm font-medium text-slate-600">Tipo do produto</label>
                     <select 
                       className="p-2 border border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 text-slate-900 bg-white"
-                      value={formData.category}
-                      onChange={(e) => setFormData({...formData, category: e.target.value})}
+                      value={formData.productType}
+                      onChange={(e) => setFormData({...formData, productType: e.target.value})}
                       required
                     >
-                      <option value="">Selecione uma categoria</option>
+                      <option value="">Selecione um tipo</option>
                       <option value="Coturno">Coturno</option>
                       <option value="Borzeguim">Borzeguim</option>
                       <option value="Tênis Esportivo">Tênis Esportivo</option>
                       <option value="Sapatos Sociais">Sapatos Sociais</option>
                       <option value="Sandálias">Sandálias</option>
+                    </select>
+                  </div>
+
+                  {/* Modelo */}
+                  <div className="flex flex-col space-y-1">
+                    <label className="text-sm font-medium text-slate-600">Modelo</label>
+                    <input 
+                      type="text"
+                      placeholder="Ex: Combat X"
+                      className="p-2 border border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 text-slate-900"
+                      value={formData.model}
+                      onChange={(e) => setFormData({...formData, model: e.target.value})}
+                    />
+                  </div>
+
+                  {/* Marca */}
+                  <div className="flex flex-col space-y-1">
+                    <label className="text-sm font-medium text-slate-600">Marca</label>
+                    <select 
+                      className="p-2 border border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 text-slate-900 bg-white"
+                      value={formData.brand}
+                      onChange={(e) => setFormData({...formData, brand: e.target.value})}
+                      required
+                    >
+                      <option value="">Selecione uma marca</option>
+                      <option value="Atalaia">Atalaia</option>
+                      <option value="Acero">Acero</option>
+                      <option value="Bull Terrier">Bull Terrier</option>
+                      <option value="Oakley">Oakley</option>
+                      <option value="Macboot">Macboot</option>
                     </select>
                   </div>
 
@@ -181,24 +210,65 @@ export default function Produtos_Catalogo() {
 
                 </div>
 
-                {/* Imagem do Produto (Botão de Anexo Customizado) */}
-                  <div className="flex flex-col space-y-1">
-                    <label className="text-sm font-medium text-slate-600">Imagem do Produto</label>
-                    <div className="flex items-center space-x-3">
-                      <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-medium px-4 py-2 rounded-lg transition-colors text-sm flex items-center justify-center">
-                        <span>Anexar Imagem</span>
-                        <input 
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={handleFileChange}
-                        />
-                      </label>
-                      <span className="text-sm text-slate-500 truncate max-w-xs">
-                        {formData.image ? formData.image : 'Nenhum arquivo escolhido'}
-                      </span>
-                    </div>
+                {/* Descrição */}
+                <div className="flex flex-col space-y-1">
+                  <label className="text-sm font-medium text-slate-600">Descrição</label>
+                  <textarea 
+                    rows="3"
+                    placeholder="Digite os detalhes e especificações do produto..."
+                    className="p-2 border border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 text-slate-900"
+                    value={formData.description}
+                    onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  />
+                </div>
+
+                {/* Ativo (Botão de seleção Ativo ou Inativo) */}
+                <div className="flex flex-col space-y-1">
+                  <label className="text-sm font-medium text-slate-600">Status do Produto</label>
+                  <div className="flex space-x-4">
+                    <button
+                      type="button"
+                      onClick={() => setFormData({...formData, active: 'Ativo'})}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
+                        formData.active === 'Ativo'
+                          ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                          : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                      }`}
+                    >
+                      Ativo
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setFormData({...formData, active: 'Inativo'})}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
+                        formData.active === 'Inativo'
+                          ? 'bg-rose-600 text-white border-rose-600 shadow-sm'
+                          : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                      }`}
+                    >
+                      Inativo
+                    </button>
                   </div>
+                </div>
+
+                {/* Imagem do Produto (Botão de Anexo Customizado) */}
+                <div className="flex flex-col space-y-1">
+                  <label className="text-sm font-medium text-slate-600">Imagem do Produto</label>
+                  <div className="flex items-center space-x-3">
+                    <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-medium px-4 py-2 rounded-lg transition-colors text-sm flex items-center justify-center">
+                      <span>Anexar Imagem</span>
+                      <input 
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleFileChange}
+                      />
+                    </label>
+                    <span className="text-sm text-slate-500 truncate max-w-xs">
+                      {formData.image ? formData.image : 'Nenhum arquivo escolhido'}
+                    </span>
+                  </div>
+                </div>
 
                 {/* Botões de Ação do Formulário */}
                 <div className="flex space-x-3 pt-4">
